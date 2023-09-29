@@ -4,21 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pioneer Bank</title>
+    <title>Bank Account</title>
     <link rel="stylesheet" href="style.css">
     <link rel="import" href="component.html">
    
 </head>
 <body>
-    <div id="login-area">
-        <h1 class="bank-title">Welcome To Pioneer Bank</h1>
-        <div class="submit-area">
-            <h3>Login</h3>
-            <input type="text" placeholder="Email" class="a">
-            <input type="password" placeholder="Password" class="a">
-            <button id="login" class="button-enter">Enter</button>
-        </div>
-    </div> 
+     
+
+
     <div id="transaction-area">
         <div class="row">
             <div class="col-md-4 deposit">
@@ -31,7 +25,7 @@
             </div>
             <div class="col-md-4 blance">
                 <h3>Blance</h3>
-                <h2>$ <span id="currentBalance">1240</span></h2>
+                <h2>$ <span id="currentBalance">00</span></h2>
             </div>
         </div>
     <div class="row">
@@ -53,31 +47,60 @@
 
 
     <script>
-        const loginBtn = document.getElementById("login");
-        loginBtn.addEventListener("click", function(){
-            const loginArea = document.getElementById("login-area");
-            loginArea.style.display = "none";
-            const transactionArea = document.getElementById("transaction-area");
-            transactionArea.style.display = "block";
-        }) 
+
+
+
+       
         const depositBtn = document.getElementById("addDeposit");
+        const allDepo = parseFloat(document.getElementById('currentDeposit').innerText);
         depositBtn.addEventListener("click", function(){
-           const depositNumber = getInputNumber("depositAmount");
+        const depositNumber = getInputNumber("depositAmount");
 
-
-          updateSpanText("currentDeposit", depositNumber);
-          updateSpanText("currentBalance", depositNumber)
+           if(depositNumber>=5){
+            updateSpanText("currentDeposit", depositNumber);
+            updateSpanText("currentBalance", depositNumber)
+        
           document.getElementById("depositAmount").value = "";
+          alert('your depozit balance succesful'  )
+
+           }
+
+           else{
+            alert('your depozit balance minimum 5 taka');
+            document.getElementById("depositAmount").value = "";
+           }
+
+
+          
         })
 
+        
+        
 
         const withdrawBtn = document.getElementById("addWithdraw");
         withdrawBtn.addEventListener("click", function(){
-            const withdrawNumber = getInputNumber("withdrawAmount");
+            const curentMoney = parseFloat(document.getElementById('currentBalance').innerText);
             
-            updateSpanText("currentWithdraw", withdrawNumber);
-            updateSpanText("currentBalance", -1 * withdrawNumber);
-            document.getElementById("withdrawAmount").value = "";
+            const withdrawNumber = getInputNumber("withdrawAmount");
+
+           
+            if(withdrawNumber>=50){
+
+                if(curentMoney<withdrawNumber){
+                alert('infulance blance')
+                 }
+                else{
+                updateSpanText("currentWithdraw", withdrawNumber);
+                 updateSpanText("currentBalance", -1 * withdrawNumber);
+                 document.getElementById("withdrawAmount").value = "";
+                 alert('withdrow succewsfull')
+                }
+            }
+
+            
+            else{
+                alert('minumum withdrow ammonunt 50')
+            }
         })
         function getInputNumber(id){
             const amount = document.getElementById(id).value;

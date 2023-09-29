@@ -2,119 +2,64 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bank Account</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="import" href="component.html">
-   
+    <title>Bank</title>
+    <style>
+        body{
+    padding: 100px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.bank-title{
+    text-align: center;
+}
+.a{
+    width: 95%;
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+}
+.button-enter{
+    padding: 10px;
+    margin: 10px;
+    background:  rgb(7, 154, 71);
+    border: 0;
+    border-radius: 8px;
+    font-weight: bold;
+}
+.submit-area{
+    margin-top: 50px;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 29px gray ;
+}
+.button-enter:hover{
+    color: rgb(252, 250, 250);
+}
+    </style>
 </head>
 <body>
-     
-
-
-    <div id="transaction-area">
-        <div class="row">
-            <div class="col-md-4 deposit">
-                <h3>Deposit</h3>
-                <h2>$ <span id="currentDeposit">00</span></h2>
-            </div>
-            <div class="col-md-4 withdraw">
-                <h3>Withdraw</h3>
-                <h2>$<span id="currentWithdraw">00</span></h2>
-            </div>
-            <div class="col-md-4 blance">
-                <h3>Blance</h3>
-                <h2>$ <span id="currentBalance">00</span></h2>
-            </div>
-        </div>
-    <div class="row">
-        <div class="submit">
-            <h4>Deposit</h4>
-            <input id="depositAmount" type="text" class="a" placeholder="টাকা রাখুন">
-            <button id="addDeposit" class="button-enter">Deposit</button>
+    <div id="login-area">
+        <h1 class="bank-title">Welcome To <span class="h"> (H) </span> Bank</h1>
+        <div class="submit-area">
+            <h3>Login</h3>
+            <input type="text" placeholder="Email" class="a" id="input-user">
+            <input type="password" placeholder="Password"   id="input-pass" class="a">
+            <button id="login" class="button-enter" >Enter</button>
         </div>
     </div>
-    <div class="row">
-        <div class="submit">
-            <h4>Deposit</h4>
-            <input id="withdrawAmount" type="text" class="a" placeholder="টাকা তুলুন">
-            <button id="addWithdraw" class="button-enter">Withdraw</button>
-        </div>
-    </div>
-</div>
- 
-
 
     <script>
-
-
-
-       
-        const depositBtn = document.getElementById("addDeposit");
-        const allDepo = parseFloat(document.getElementById('currentDeposit').innerText);
-        depositBtn.addEventListener("click", function(){
-        const depositNumber = getInputNumber("depositAmount");
-
-           if(depositNumber>=5){
-            updateSpanText("currentDeposit", depositNumber);
-            updateSpanText("currentBalance", depositNumber)
-        
-          document.getElementById("depositAmount").value = "";
-          alert('your depozit balance succesful'  )
-
-           }
-
-           else{
-            alert('your depozit balance minimum 5 taka');
-            document.getElementById("depositAmount").value = "";
-           }
-
-
-          
-        })
-
-        
-        
-
-        const withdrawBtn = document.getElementById("addWithdraw");
-        withdrawBtn.addEventListener("click", function(){
-            const curentMoney = parseFloat(document.getElementById('currentBalance').innerText);
-            
-            const withdrawNumber = getInputNumber("withdrawAmount");
-
-           
-            if(withdrawNumber>=50){
-
-                if(curentMoney<withdrawNumber){
-                alert('infulance blance')
-                 }
-                else{
-                updateSpanText("currentWithdraw", withdrawNumber);
-                 updateSpanText("currentBalance", -1 * withdrawNumber);
-                 document.getElementById("withdrawAmount").value = "";
-                 alert('withdrow succewsfull')
-                }
+        const loginBtn = document.getElementById('login');
+        loginBtn.addEventListener('click', function(){
+            const userid = document.getElementById('input-user').value;
+            const password = document.getElementById('input-pass').value;
+            if(userid=== 'demo@gmail.com' && password ==="123"){
+                window.open('dashbord.html');
             }
-
-            
             else{
-                alert('minumum withdrow ammonunt 50')
+                alert('user id or password rong')
             }
         })
-        function getInputNumber(id){
-            const amount = document.getElementById(id).value;
-            const amountNumber = parseFloat(amount);
-            return amountNumber;
-        }
-
-        function updateSpanText(id, depositNumber){
-            const current = document.getElementById(id).innerText;
-            const currentNumber =  parseFloat(current);
-            const totalAmount = depositNumber + currentNumber;
-            document.getElementById(id).innerText = totalAmount;
-        }
     </script>
-    
 </body>
 </html>
